@@ -17,8 +17,10 @@ const movie = {
 }
 
 const App = () => {
-  //useEffect
+  //useState for movies
   const [movies, setMovies] = useState([]);
+  //useState for search
+  const [searchTerm, setSearchTerm] = useState('');
   //search using async await
   const searchMovies = async (title) => {
       const response = await fetch(`${API_URL}&s=${title}`);
@@ -37,9 +39,11 @@ const App = () => {
       <h1>Imwene Movie Land</h1>
 
       <div className="search">
-        <input placeholder = "Search Movies" value="Superman" onChange={()=>{}}>
+        <input placeholder = "Search Movies" 
+        value={searchTerm} 
+        onChange={(e)=>{setSearchTerm(e.target.value)}}>
         </input>
-        <img src={searchIcon} alt='search' onClick={()=>{}} />
+        <img src={searchIcon} alt='search' onClick={()=>{searchMovies(searchTerm)}} />
       </div>
     {/*Map through the movie and render movie card for each iteration of movie*/}
       {
